@@ -65,11 +65,11 @@ Download the RecipeNLG dataset and insert it into the project this way:
 │   ├── raw-KB  # ChromaDB storage for recipes
         ├──RecipeNLG.csv
 ```
-Then, launch the script that generates the vector store this way:
+Then, launch the srcript that generates the vector store this way:
 ```bash
 python -m src.retriever
 ```
-This will run the script tha
+
 ### Running the Chatbot
 ```bash
 python -m src.chatbot
