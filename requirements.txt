@@ -1,0 +1,6 @@
+langchain_huggingface
+langchain_chroma
+langchain_community
+langchain_anthropic
+pandas
+gradio
