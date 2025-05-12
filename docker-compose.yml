@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build:
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile  # Specify the Dockerfile to build the image
+    ports:
+      - "7860:7860"  # Expose port 7860 (Gradio app default) on your host to port 7860 in the container
+    env_file:
+      - .env  # Load environment variables from the .env file
+    volumes:
+      - ./data/recipes-vector-store:/app/data/recipes-vector-store  # Persist vector store data
+    stdin_open: true  # Allow interactive stdin (optional for some setups)
+    tty: true  # Allow interactive tty (optional for some setups)
