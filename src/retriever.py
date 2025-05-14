@@ -3,9 +3,16 @@ from langchain_chroma import Chroma
 from uuid import uuid4
 from langchain_core.documents import Document
 import pandas as pd
+import torch
 
-# load the HuuggingFace Embeddings on GPU
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs = {'device': 'cuda'})
+# load the HuggingFace Embeddings on GPU
+if torch.backends.mps.is_available():
+    device = 'mps'
+elif torch.cuda.is_available():
+    device = 'cuda'
+else:
+    device = 'cpu'
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs = {'device': device})
 
 # Load the df
 data_path = "data/raw-KB/RecipeNLG.csv"

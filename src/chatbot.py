@@ -7,6 +7,7 @@ from langchain.memory import ConversationBufferMemory, ConversationSummaryBuffer
 from langchain.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 import gradio as gr
+import torch
 from src.templates import load_template
 
 # load api keys from environment
@@ -15,7 +16,13 @@ anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
 langsmith_api_key = os.getenv("LANGSMITH_API_KEY")
 
 # load the HuggingFace Embeddings on GPU
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs = {'device': 'cuda'})
+if torch.backends.mps.is_available():
+    device = 'mps'
+elif torch.cuda.is_available():
+    device = 'cuda'
+else:
+    device = 'cpu'
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs = {'device': device})
 
 # Load the pre-saved Chroma vector store with the recipes
 vector_store = Chroma(

@@ -7,7 +7,7 @@ This project is an AI-powered chatbot that helps users find and generate cooking
 - Retrieves relevant recipes from a Chroma vector database using `sentence-transformers/all-MiniLM-L6-v2` embeddings.
 - Reformulates user queries for more context aware retrieval using a query rewriter.
 - Stores conversation history to provide more robust responses.
-- The chatbot draws from the knowledge base to suggest recipes, but can also use its original training data to look for recipes when       prompted to do so.
+- The chatbot draws from the knowledge base to suggest recipes, but can also use its original training data to look for recipes when prompted to do so.
 - Provides a basic interactive chat interface using Gradio.
 
 ## Dataset: RecipeNLG
@@ -50,6 +50,8 @@ chmod +x setup.sh
 ```
 For linux and MacOS.
 
+After the setup, activate the recipes_venv virtual environment.
+
 ### Setting Up API Keys
 This project requires API keys for Anthropic's Claude model and LangSmith (optional, for tracking API calls). Create a `.env` file in the root directory:
 
@@ -62,10 +64,10 @@ Download the RecipeNLG dataset and insert it into the project this way:
 ```
 📂 recipe-chatbot
 ├── 📂 data
-│   ├── raw-KB  # ChromaDB storage for recipes
-        ├──RecipeNLG.csv
+│   ├── 📂 raw-KB  # ChromaDB storage for recipes
+        ├── RecipeNLG.csv
 ```
-Then, launch the srcript that generates the vector store this way:
+Then, launch the script that generates the vector store this way:
 ```bash
 python -m src.retriever
 ```
